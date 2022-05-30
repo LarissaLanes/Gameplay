@@ -4,7 +4,7 @@ export const theme = {
         primary: "#E51C44",
         line: "#991F36",
         on: '#32BD50',
-        overlay: 'rgba(0,0,0,0,7)',
+        overlay: 'rgba(0,0,0,0.7)',
         highlight: '#DDE3F0',
 
 

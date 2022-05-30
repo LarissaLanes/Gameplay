@@ -1,4 +1,4 @@
-import { theme } from './../../global/styles/theme';
+import { theme } from '../../global/styles/theme';
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -10,23 +10,11 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    iconWrapper:{
-        width: 56,
-        height: 56,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRightWidth: 1,
-        borderColor: theme.colors.line,
-    },
-    icon:{
-        width: 24,
-        height: 18,
-    },
     textButton:{
         flex: 1,
         color: theme.colors.heading,
         fontSize: 15,
         textAlign: 'center',
-        fontFamily: theme.fonts.text500
+        fontFamily:   theme.fonts.text500,
     }
 });

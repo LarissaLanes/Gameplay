@@ -7,18 +7,12 @@ import { categories } from "../../utils/categories";
 import Players from "../../assets/player.svg"
 import { theme } from "../../global/styles/theme";
 import Calendar from "../../assets/calendar.svg"
+import { GuildProps } from "../Guild";
 
 type Props =  RectButton & {
     data: AppointmentProps;
 }
 
-export type GuildProps = {
-    id: string;
-    name: string;
-    icon: null;
-    owner: boolean;
-
-}
 
 export type AppointmentProps = {
     id: string;

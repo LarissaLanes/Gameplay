@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
-import React, {useState} from "react";
-import {View, FlatList, Text} from 'react-native';
+import React, { useState } from "react";
+import { View, FlatList } from 'react-native';
 import { Appointment } from "../../components/appointment";
 import { Background } from "../../components/Background";
 import { ButtonAdd } from "../../components/ButtonAdd";
@@ -10,7 +10,7 @@ import { Profile } from "../../components/Profile";
 import { ScroolView } from "../../components/Scrool";
 import { styles } from "./styles";
 
-export function Home(){
+export function Home() {
     const [category, setCategory] = useState('');
     const navigation = useNavigation();
 
@@ -39,26 +39,75 @@ export function Home(){
             date: '22/06 às 20:40h',
             description: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10'
         },
+        {
+            id: '3',
+            guild: {
+                id: '1',
+                name: 'Lendários',
+                icon: null,
+                owner: false
+            },
+            category: '1',
+            date: '22/06 às 20:40h',
+            description: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10'
+        },
+        {
+            id: '4',
+            guild: {
+                id: '1',
+                name: 'Lendários',
+                icon: null,
+                owner: false
+            },
+            category: '1',
+            date: '22/06 às 20:40h',
+            description: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10'
+        },
+        {
+            id: '5',
+            guild: {
+                id: '1',
+                name: 'Lendários',
+                icon: null,
+                owner: false
+            },
+            category: '1',
+            date: '22/06 às 20:40h',
+            description: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10'
+        },
+        {
+            id: '6',
+            guild: {
+                id: '1',
+                name: 'Lendários',
+                icon: null,
+                owner: false
+            },
+            category: '1',
+            date: '22/06 às 20:40h',
+            description: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10'
+        },
+
 
     ]
 
-    function handleCategorySelect(categoryId: string){
-        categoryId === category? setCategory('') : setCategory(categoryId);
+    function handleCategorySelect(categoryId: string) {
+        categoryId === category ? setCategory('') : setCategory(categoryId);
     }
 
-    function HandleAppointmentDetails(){
+    function HandleAppointmentDetails() {
         navigation.navigate('AppointmentDetails');
     }
 
-    function HandleAppointmentCreate(){
+    function HandleAppointmentCreate() {
         navigation.navigate('AppointmentCreate');
     }
 
-    return(
+    return (
         <Background>
             <View style={styles.header}>
-                <Profile/>
-                <ButtonAdd onPress={HandleAppointmentCreate}/>
+                <Profile />
+                <ButtonAdd onPress={HandleAppointmentCreate} />
             </View>
 
             <View>
@@ -68,25 +117,24 @@ export function Home(){
                 />
             </View>
 
-            <View style={styles.content}>
-                <ListHeader
+            <ListHeader
                 title='Partidas agendadas'
                 subtitle="Total 6"
-                />
-                
-                <FlatList
-                    data={appoinments}
-                    keyExtractor={item => item.id}
-                    renderItem={({item}) => (
+            />
+
+            <FlatList
+                data={appoinments}
+                keyExtractor={item => item.id}
+                renderItem={({ item }) => (
                     <Appointment data={item}
                         onPress={HandleAppointmentDetails}
-                        />
-                    )}
-                    ItemSeparatorComponent={() => <ListDivider/>}
-                    style={styles.matches}
-                    showsVerticalScrollIndicator={false}
-                />
-            </View>
+                    />
+                )}
+                ItemSeparatorComponent={() => <ListDivider />}
+                style={styles.matches}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{paddingBottom: 69}}
+            />
         </Background>
     );
 }

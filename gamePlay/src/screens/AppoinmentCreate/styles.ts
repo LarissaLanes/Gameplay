@@ -40,5 +40,32 @@ export const styles = StyleSheet.create({
     selectBody:{
         flex: 1,
         alignItems: 'center',
+    },
+    field:{
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 30,
+    },
+    column:{
+        flexDirection: 'row',
+        alignItems: 'center',
+
+    },
+    divider:{
+        marginRight: 4,
+        fontSize: 15,
+        fontFamily: theme.fonts.title500,
+        color: theme.colors.highlight
+    },
+    labelCaracteres:{
+        fontSize: 13,
+        fontFamily: theme.fonts.text400,
+        color: theme.colors.highlight,
+    },
+    footer:{
+        marginVertical: 20,
+        marginBottom: 56,
+
     }
 })

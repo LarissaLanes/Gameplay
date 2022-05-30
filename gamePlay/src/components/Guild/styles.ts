@@ -3,20 +3,26 @@ import {StyleSheet} from 'react-native'
 
 export const styles = StyleSheet.create({
     container:{
-        width: '100%',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        width: '100%',
+        alignItems: 'center',
         paddingHorizontal: 24,
-        marginTop: 27,
+    },
+    content:{
+        flex: 1,
+        justifyContent: 'center',
     },
     title:{
-        fontFamily: theme.fonts.title700,
         color: theme.colors.heading,
+        fontFamily: theme.fonts.title700,
         fontSize: 18,
+        marginBottom: 4,
     },
-    subtitle:{
-        fontFamily: theme.fonts.text400,
+    type:{
         color: theme.colors.highlight,
+        fontFamily: theme.fonts.text400,
         fontSize: 13,
+        marginBottom: 12,
+
     }
 })
