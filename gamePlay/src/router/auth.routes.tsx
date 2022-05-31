@@ -19,7 +19,7 @@ export function AuthRoutes (){
             }
         }}
        >
-           <Stack.Screen name='Signin' component={SignIn}/>
+           {/* <Stack.Screen name='Signin' component={SignIn}/> */}
            <Stack.Screen name='Home' component={Home}/>
            <Stack.Screen name='AppointmentDetails' component={AppointmentDetails}/>
            <Stack.Screen name='AppointmentCreate' component={AppointmentCreate}/>

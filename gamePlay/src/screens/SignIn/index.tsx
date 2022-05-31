@@ -1,19 +1,33 @@
 import React from "react";
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, Alert, ActivityIndicator, Button} from 'react-native';
 import { styles } from "./styles";
 import ilustrationImage from "../../assets/illustration.png"
-import { useNavigation } from "@react-navigation/native";
+// import { useNavigation } from "@react-navigation/native";
 import { ButtonIcon } from "../../components/ButtonIcon";
 import { Background } from "../../components/Background";
+import { theme } from "../../global/styles/theme";
 
+import { useAuth } from "../../Hooks/auth"; 
+import { ButtonAdd } from "../../components/ButtonAdd";
 
 
 export function SignIn (){
-    const navigation = useNavigation();
+    // const navigation = useNavigation();
+    const {loading, signIn} = useAuth();
 
-    function handleHome(){
-        navigation.navigate('Home');
+
+   async function handleHome(){
+        // navigation.navigate('Home');
+        try{
+            await signIn();
+            // Alert.alert('Funcionaaa')
+
+
+        }catch(error: any){
+            Alert.alert(error)
+        }
     }
+
 
     return(
     <Background>
@@ -36,10 +50,24 @@ export function SignIn (){
                         favoritos com seus amigos
                     </Text>
 
-                    <ButtonIcon 
-                        title="Entrar com o Discord"
-                        onPress={handleHome}
+                {
+                    loading ? <ActivityIndicator color={theme.colors.primary}/> 
+                    :
+                    <Button
+                    title={"entrar"}
+                    onPress={handleHome}
                     />
+                   
+                    
+                }
+
+                 {/* <ButtonIcon 
+                    title="Entrar com o Discord"
+                    onPress={handleHome}/> */}
+             
+                  
+
+                   
                 </View>
             </View>
         </Background>

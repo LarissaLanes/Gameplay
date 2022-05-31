@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
         fontSize: 18,
     },
     category:{
-        fontFamily: theme.fonts.text400,
+        // fontFamily: theme.fonts.text400,
         color: theme.colors.highlight,
         fontSize: 13,
         marginRight: 24,
@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
 
     },
     players:{
-        fontFamily: theme.fonts.text500,
+        // fontFamily: theme.fonts.text500,
         fontSize: 13,
         marginLeft: 7,
         marginRight: 24,
@@ -47,7 +47,7 @@ export const styles = StyleSheet.create({
 
     },
     date:{
-        fontFamily: theme.fonts.text500,
+        // fontFamily: theme.fonts.text500,
         color: theme.colors.heading,
         fontSize: 13,
         marginLeft: 7,

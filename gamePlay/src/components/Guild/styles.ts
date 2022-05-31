@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     },
     type:{
         color: theme.colors.highlight,
-        fontFamily: theme.fonts.text400,
+        // fontFamily: theme.fonts.text400,
         fontSize: 13,
         marginBottom: 12,
 
