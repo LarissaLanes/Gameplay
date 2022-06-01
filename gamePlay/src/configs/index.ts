@@ -6,7 +6,6 @@ import {
     CDN_IMAGE
 } from "./discordAuth";
 
-
 export {
     REDIRECT_URI,
     SCOPE,

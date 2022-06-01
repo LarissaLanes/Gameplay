@@ -16,12 +16,14 @@ export const theme = {
         secondary60: '#243189',
         secondary50: '#1D2766',
         secondary40: '#495BCC',
+
+        discord: '#7289da'
         
     },
     fonts:{
-        // title700: 'Rajdhani_700Bold',
-        // title500: 'Rajdhani_500Medium',
-        // text400: 'Inter_400Regular',
-        // text500: 'Inter_500Medium',
+        title700: 'Rajdhani_700Bold',
+        title500: 'Rajdhani_500Medium',
+        text400: 'Inter_400Regular',
+        text500: 'Inter_500Medium',
     }
 };

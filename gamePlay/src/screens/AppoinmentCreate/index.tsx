@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
+import { Text, View, ScrollView, KeyboardAvoidingView, Platform, Button } from 'react-native';
 import { RectButton } from "react-native-gesture-handler";
 import { Background } from "../../components/Background";
 import { Header } from "../../components/Header";
@@ -14,14 +14,24 @@ import { ModalGuild } from "../../components/ModalGuild";
 import { Guild } from "../Guild";
 import { GuildProps } from "../../components/Guild";
 import { GuildIcon } from "../../components/GuildIcon";
-
-
+import DiscordSVG from "../../assets/discord.svg";
+import uuid from  'react-native-uuid';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { COLLECTION_APPOINTMENT } from "../../configs/dataBase";
+import { useNavigation } from "@react-navigation/native";
 
 export function AppointmentCreate(){
     const [category, setCategory] = useState('');
     const [open, setOpen] = useState(false);
     const [guild, setGuild] = useState<GuildProps>({} as GuildProps);
 
+    const [day, setDay] = useState('');
+    const [month, setMonth] = useState('');
+    const [hours, setHours] = useState('');
+    const [minute, setMinute] = useState('');
+    const [decription, setDescription] = useState('');
+
+    const navigation = useNavigation();
 
     function HandleOpen(){
         setOpen(true)
@@ -34,6 +44,26 @@ export function AppointmentCreate(){
     function HandleSelect(guildSelect: GuildProps){
         setGuild(guildSelect)
         setOpen(false)
+    }
+
+    async function handleSave() {
+        const newAppointment = {
+            id: uuid.v4(),
+            guild,
+            category,
+            date: `${day}/${month} às ${hours}:${minute}h`,
+            decription
+        };
+
+        const storage = await AsyncStorage.getItem(COLLECTION_APPOINTMENT);
+        const appointments = storage ?  JSON.parse(storage) : [];
+
+        await AsyncStorage.setItem(
+            COLLECTION_APPOINTMENT,
+            JSON.stringify([...appointments, newAppointment])
+        );
+
+        navigation.navigate('Home');
     }
     
     return(
@@ -62,7 +92,7 @@ export function AppointmentCreate(){
                             <View style={styles.select}>
 
                                 {
-                                    guild.icon ? <GuildIcon/> : <View style={styles.image}/>
+                                    guild.icon ? <GuildIcon guildId={guild.id} iconId={guild.icon}/> : <DiscordSVG style={styles.image}/>
                                 }
 
                                 <View style={styles.selectBody}>
@@ -91,9 +121,13 @@ export function AppointmentCreate(){
                                 </Text>
 
                                 <View style={styles.column}>
-                                    <SmallInput maxLength={2}/>
+                                    <SmallInput maxLength={2}
+                                    onChangeText={setDay}
+                                    />
                                     <Text style={styles.divider}>/</Text>
-                                    <SmallInput maxLength={2}/>
+                                    <SmallInput maxLength={2}
+                                    onChangeText={setMonth}
+                                    />
                                 </View>
                             </View>
         
@@ -103,9 +137,13 @@ export function AppointmentCreate(){
                                 </Text>
 
                                 <View style={styles.column}>
-                                    <SmallInput maxLength={2}/>
+                                    <SmallInput maxLength={2}
+                                    onChangeText={setHours}
+                                    />
                                     <Text style={styles.divider}>:</Text>
-                                    <SmallInput maxLength={2}/>
+                                    <SmallInput maxLength={2}
+                                    onChangeText={setMinute}
+                                    />
                                 </View>
                             </View>
                         </View>
@@ -126,10 +164,18 @@ export function AppointmentCreate(){
                                 maxLength={100}
                                 numberOfLines={5}
                                 autoCorrect={false}
+                                onChangeText={setDescription}
                         />
 
                         <View style={styles.footer}>
-                            <ButtonInput title='Agendar'/>
+                            <ButtonInput 
+                            title='Agendar'
+                            onPress={handleSave}
+                            />
+
+                            {/* <Button title="oi"
+                            onPress={handleSave} */}
+                            {/* /> */}
                         </View>
                     </View>
                 </Background>

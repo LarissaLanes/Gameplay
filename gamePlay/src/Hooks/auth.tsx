@@ -1,5 +1,7 @@
-import React, { createContext, ReactNode, useContext, useState } from "react";
+import React, { createContext, ReactNode, useContext, useState , useEffect} from "react";
 import * as AuthSession from "expo-auth-session";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import {
     REDIRECT_URI,
@@ -7,14 +9,15 @@ import {
     RESPONSE_TYPE,
     CLIENT_ID,
     CDN_IMAGE
-} from '../configs'
+} from "../configs"
 
 import { api } from "../services/api";
+
+import {COLLECTION_USER }from "../configs/dataBase";
 
 type User = {
     id: string;
     username: string;
-    firstName: string;
     avatar: string;
     email: string;
     token: string;
@@ -32,7 +35,8 @@ type AuthProviderProps = {
 
 type AuthorizationResponse = AuthSession.AuthSessionResult & {
     params: {
-        access_token: string;
+        access_token?: string;
+        error?: string;
     }
 }
 
@@ -48,42 +52,47 @@ function AuthProvider({ children} : AuthProviderProps ){
 
             const authUrl = `${api.defaults.baseURL}/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
             
-            // const authUrl = 'https://discord.com/api/oauth2/authorize?client_id=980958443756220417&redirect_uri=https%3A%2F%2Fauth.expo.io%2Fgameplay&response_type=code&scope=email%20identify%20connections%20guilds'
-            console.log(authUrl)
-
             const { type, params} = await AuthSession.startAsync({ authUrl}) as AuthorizationResponse;
 
-                // const response = AuthSession
-                // .startAsync({authUrl})
-
-            // console.log(response)
-
-            if(type === "success"){
-                api.defaults.headers.authorization = `Bearer ${params.access_token}`;
+            if(type === "success" && !params.error){
+                api.defaults.headers.common['authorization'] = `Bearer ${params.access_token}`;
 
                 const userInfo = await api.get('/users/@me');
 
-                const firstName = userInfo.data.username.split('')[0];
-
                 userInfo.data.avatar = `${CDN_IMAGE}/avatars/${userInfo.data.id}/${userInfo.data.avatar}.png`
 
-                console.log(userInfo)
-                setUser({
+                const userData = {
                     ...userInfo.data,
-                    firstName,
                     token: params.access_token
-                });
+                }
+                
+                await AsyncStorage.setItem(COLLECTION_USER, JSON.stringify(userData));
 
-                setLoading(false);
-            }else{
-                setLoading(false);
+                setUser(userData)
             }
 
         }catch{
             throw new Error('Não foi possivel autenticar')
+        }finally{
+            setLoading(false)
         }
-
     }
+
+    async function checkUserInLocalStorage() {
+        const storage = await AsyncStorage.getItem(COLLECTION_USER)
+        
+        if(storage){
+            const userLogged = JSON.parse(storage) as User;
+            api.defaults.headers.common['authorization'] = `Bearer ${userLogged.token}` ;
+
+            setUser(userLogged);
+        }
+    }
+
+    useEffect(() => {
+        checkUserInLocalStorage();
+
+    },[]);
     
     return(
         <AuthContext.Provider value={{

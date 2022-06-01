@@ -17,12 +17,8 @@ export function SignIn (){
 
 
    async function handleHome(){
-        // navigation.navigate('Home');
         try{
             await signIn();
-            // Alert.alert('Funcionaaa')
-
-
         }catch(error: any){
             Alert.alert(error)
         }
@@ -53,19 +49,20 @@ export function SignIn (){
                 {
                     loading ? <ActivityIndicator color={theme.colors.primary}/> 
                     :
+                    // <ButtonIcon 
+                    // title="Entrar com o Discord"
+                    // onPress={handleHome}/>
+
                     <Button
                     title={"entrar"}
                     onPress={handleHome}
-                    />
-                   
-                    
+                    />   
+              
                 }
 
-                 {/* <ButtonIcon 
-                    title="Entrar com o Discord"
-                    onPress={handleHome}/> */}
+               
              
-                  
+           
 
                    
                 </View>

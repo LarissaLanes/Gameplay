@@ -21,7 +21,7 @@ export function Profile(){
                     </Text>
 
                     <Text style={styles.username}>
-                        {user.firstName}
+                        {user.username}
                     </Text>
                 </View>
 

@@ -75,7 +75,7 @@ export function AppointmentDetails(){
                 renderItem={({item}) => (
                     <Members data={item}/>
                 )}
-                ItemSeparatorComponent={() => <ListDivider/>}
+                ItemSeparatorComponent={() => <ListDivider isCenter/>}
                 style={styles.members}
             />
 
