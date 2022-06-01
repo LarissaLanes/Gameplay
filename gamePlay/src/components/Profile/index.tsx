@@ -6,7 +6,7 @@ import { useAuth } from '../../Hooks/auth';
 
 export function Profile(){
     const {user} = useAuth();
-    console.log(user)
+
     return(
         <View style={styles.container}>
 

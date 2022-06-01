@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, ScrollView, KeyboardAvoidingView, Platform, Button } from 'react-native';
+import { Text, View, ScrollView, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import { RectButton } from "react-native-gesture-handler";
 import { Background } from "../../components/Background";
 import { Header } from "../../components/Header";
@@ -34,16 +34,21 @@ export function AppointmentCreate(){
     const navigation = useNavigation();
 
     function HandleOpen(){
-        setOpen(true)
+        setOpen(true);
     }
 
     function HandleClose(){
-        setOpen(false)
+        setOpen(false);
     }
     
     function HandleSelect(guildSelect: GuildProps){
         setGuild(guildSelect)
-        setOpen(false)
+        setOpen(false);
+    }
+
+    function HandleCategorySelect(categoryId: string){
+        setCategory(categoryId);
+
     }
 
     async function handleSave() {
@@ -55,6 +60,7 @@ export function AppointmentCreate(){
             decription
         };
 
+
         const storage = await AsyncStorage.getItem(COLLECTION_APPOINTMENT);
         const appointments = storage ?  JSON.parse(storage) : [];
 
@@ -63,7 +69,16 @@ export function AppointmentCreate(){
             JSON.stringify([...appointments, newAppointment])
         );
 
+        // if(!newAppointment.decription){
+        //     Alert.alert("Preencha todos os campos")
+        // }else {
+
+
+        // }
+
         navigation.navigate('Home');
+
+
     }
     
     return(
@@ -81,7 +96,7 @@ export function AppointmentCreate(){
 
                     <ScroolView
                         hasCheckBox
-                        setCategory={setCategory}
+                        setCategory={HandleCategorySelect}
                         categorySelected={category}
                     />
 

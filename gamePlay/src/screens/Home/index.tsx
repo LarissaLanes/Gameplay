@@ -1,7 +1,7 @@
+import React, { useState, useCallback } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
-import React, { useState, useCallback } from "react";
-import { View, FlatList , Button} from 'react-native';
+import { View, FlatList } from 'react-native';
 import { Appointment, AppointmentProps } from "../../components/appointment";
 import { Background } from "../../components/Background";
 import { ButtonAdd } from "../../components/ButtonAdd";
@@ -12,14 +12,39 @@ import { ScroolView } from "../../components/Scrool";
 import { COLLECTION_APPOINTMENT } from "../../configs/dataBase";
 import { styles } from "./styles";
 import { Load } from "../../components/Loading";
-import { GuildComponents, GuildProps } from "../../components/Guild";
 
 export function Home() {
+    const [appointments, setAppointments] = useState<AppointmentProps[]>([]);
     const [category, setCategory] = useState('');
     const navigation = useNavigation();
     const [loading, setLoading] = useState(true);
-    const [appointments, setAppointments] = useState<AppointmentProps[]>([]);
-    const [guilds, setGuilds] = useState<GuildProps[]>([]);
+
+    const mock = [
+        {
+            id: '1',
+            guild: {
+                id: '1',
+                name: 'Lendários',
+                icon: null,
+                owner: true
+            },
+            category: '1',
+            date: '22/06 às 20:40h',
+            description: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10'
+        },
+        {
+            id: '2',
+            guild: {
+                id: '1',
+                name: 'Lendários',
+                icon: null,
+                owner: false
+            },
+            category: '1',
+            date: '22/06 às 20:40h',
+            description: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10'
+        },
+    ]
 
 
     function handleCategorySelect(categoryId: string) {
@@ -27,7 +52,7 @@ export function Home() {
     }
 
     function HandleAppointmentDetails(guildSelected: AppointmentProps) {
-        navigation.navigate('AppointmentDetails', {guildSelected});
+        navigation.navigate('AppointmentDetails', {guildSelected: guildSelected});
     }
 
     function HandleAppointmentCreate() {
@@ -50,7 +75,7 @@ export function Home() {
     useFocusEffect(useCallback(() =>  {
         appointmentsAgender();
 
-    }, [category]))
+    }, [category]));
 
     return (
         <Background>
@@ -74,12 +99,14 @@ export function Home() {
                         subtitle={`Total: ${appointments.length}`}
                     />
 
+
                     <FlatList
-                        data={guilds}
+                        data={mock}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) => (
-                            <GuildComponents data={item}
-                            onPress={() => HandleAppointmentDetails}
+                            <Appointment 
+                            data={item}
+                            onPress={() => HandleAppointmentDetails(item)}
                             />
                         )}
                         ItemSeparatorComponent={() => <ListDivider />}

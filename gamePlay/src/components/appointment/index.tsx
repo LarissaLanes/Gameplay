@@ -1,7 +1,7 @@
 import React from "react";
 import {View, Text, NativeSegmentedControlIOSChangeEvent} from 'react-native';
 import { styles } from "./styles";
-import { RectButton, RectButtonProps} from "react-native-gesture-handler"
+import { RectButton, } from "react-native-gesture-handler"
 import { GuildIcon } from "../GuildIcon";
 import { categories } from "../../utils/categories";
 import Players from "../../assets/player.svg"
