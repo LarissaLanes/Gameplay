@@ -4,17 +4,20 @@ export const theme = {
         primary: "#E51C44",
         line: "#991F36",
         on: '#32BD50',
-        overlay: 'rgba(0,0,0,0,7)',
+        overlay: 'rgba(0,0,0,0.7)',
         highlight: '#DDE3F0',
 
 
         secondary100: '#0A1033',
         secondary90: '#0D133D',
         secondary80: '#0E1647',
+        secondary85: '#171F52',
         secondary70: '#1B2565',
         secondary60: '#243189',
         secondary50: '#1D2766',
         secondary40: '#495BCC',
+
+        discord: '#7289da'
         
     },
     fonts:{

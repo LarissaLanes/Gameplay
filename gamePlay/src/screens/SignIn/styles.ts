@@ -34,5 +34,15 @@ export const styles = StyleSheet.create({
         lineHeight: 25,
 
     },
+    buttonEntry:{
+        color: theme.colors.primary,
+    
+ 
+    },
+    icon:{
+        height : '20',
+        width: '20',
+    }
+
 
 })
