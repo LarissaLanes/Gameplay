@@ -9,7 +9,7 @@ import { theme } from "../../global/styles/theme";
 import Calendar from "../../assets/calendar.svg"
 import { GuildProps } from "../Guild";
 
-type Props =  RectButton & {
+export type Props =  RectButton & {
     data: AppointmentProps;
 }
 
@@ -22,7 +22,7 @@ export type AppointmentProps = {
 }
 
 export function Appointment({data, ...rest} : Props){
-    const [category] = categories.filter(item => item.id === data.category);
+    const [categoryOwner] = categories.filter(item => item.id === data.category);
     const {owner} = data.guild;
     const {primary, on} = theme.colors
 
@@ -41,7 +41,7 @@ export function Appointment({data, ...rest} : Props){
                         </Text>
 
                         <Text style={styles.category}>
-                            {category.title}
+                            {/* {categoryOwner.title} */}
                         </Text>
                     </View>
 

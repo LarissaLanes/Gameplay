@@ -2,19 +2,13 @@ import React from "react";
 import {View, Text, Image, Alert, ActivityIndicator, Button} from 'react-native';
 import { styles } from "./styles";
 import ilustrationImage from "../../assets/illustration.png"
-// import { useNavigation } from "@react-navigation/native";
-import { ButtonIcon } from "../../components/ButtonIcon";
 import { Background } from "../../components/Background";
 import { theme } from "../../global/styles/theme";
-
 import { useAuth } from "../../Hooks/auth"; 
-import { ButtonAdd } from "../../components/ButtonAdd";
-
+import { ButtonIcon } from "../../components/ButtonIcon";
 
 export function SignIn (){
-    // const navigation = useNavigation();
     const {loading, signIn} = useAuth();
-
 
    async function handleHome(){
         try{
@@ -23,7 +17,6 @@ export function SignIn (){
             Alert.alert(error)
         }
     }
-
 
     return(
     <Background>
@@ -49,22 +42,12 @@ export function SignIn (){
                 {
                     loading ? <ActivityIndicator color={theme.colors.primary}/> 
                     :
-                    // <ButtonIcon 
-                    // title="Entrar com o Discord"
-                    // onPress={handleHome}/>
-
-                    <Button
-                    title={"entrar"}
+                    <Button 
+                    title="Entrar com o Discord"
+                    color= {theme.colors.primary}
                     onPress={handleHome}
-                    />   
-              
+                    />
                 }
-
-               
-             
-           
-
-                   
                 </View>
             </View>
         </Background>

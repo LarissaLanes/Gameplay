@@ -31,7 +31,7 @@ export function AppointmentCreate(){
     const [minute, setMinute] = useState('');
     const [decription, setDescription] = useState('');
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<string|any>();
 
     function HandleOpen(){
         setOpen(true);

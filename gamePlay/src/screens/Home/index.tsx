@@ -16,43 +16,15 @@ import { Load } from "../../components/Loading";
 export function Home() {
     const [appointments, setAppointments] = useState<AppointmentProps[]>([]);
     const [category, setCategory] = useState('');
-    const navigation = useNavigation();
+    const navigation = useNavigation<string|any>();
     const [loading, setLoading] = useState(true);
-
-    const mock = [
-        {
-            id: '1',
-            guild: {
-                id: '1',
-                name: 'Lendários',
-                icon: null,
-                owner: true
-            },
-            category: '1',
-            date: '22/06 às 20:40h',
-            description: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10'
-        },
-        {
-            id: '2',
-            guild: {
-                id: '1',
-                name: 'Lendários',
-                icon: null,
-                owner: false
-            },
-            category: '1',
-            date: '22/06 às 20:40h',
-            description: 'É hoje que vamos chegar ao challenger sem perder uma partida da md10'
-        },
-    ]
-
 
     function handleCategorySelect(categoryId: string) {
         categoryId === category ? setCategory('') : setCategory(categoryId);
     }
 
     function HandleAppointmentDetails(guildSelected: AppointmentProps) {
-        navigation.navigate('AppointmentDetails', {guildSelected: guildSelected});
+        navigation.navigate('AppointmentDetails', {guildSelected});
     }
 
     function HandleAppointmentCreate() {
@@ -99,9 +71,8 @@ export function Home() {
                         subtitle={`Total: ${appointments.length}`}
                     />
 
-
                     <FlatList
-                        data={mock}
+                        data={appointments}
                         keyExtractor={item => item.id}
                         renderItem={({ item }) => (
                             <Appointment 

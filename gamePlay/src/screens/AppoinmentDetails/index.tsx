@@ -11,7 +11,7 @@ import { ListHeader } from "../../components/ListHeader";
 import { MemberProps, Members } from "../../components/Members/index.";
 import { ListDivider } from "../../components/ListsDivider";
 import { ButtonIcon } from "../../components/ButtonIcon";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { AppointmentProps } from "../../components/appointment";
 import { api } from "../../services/api";
 import { Load } from "../../components/Loading";
@@ -32,16 +32,19 @@ export function AppointmentDetails(){
     const route = useRoute();
     const { guildSelected } = route.params as Params;
     const [ loading, setLoading] = useState(true)
+    const navigation = useNavigation<string|any>();
+
 
     async function fatchGuildWidget() {
         try{
             const response = await api.get(`/guilds/${guildSelected.guild.id}/widget.json`);
-            setWidget(response.data)
+            setWidget(response.data);
+            setLoading(false)
 
         }catch(error){
             Alert.alert('Algo deu errado ao conectar com o servidor, verifique se o widget está abilitado ')
-        }finally{
-            setLoading(false)
+            setLoading(true)
+            navigation.navigate('Home');
         }
     }
 
@@ -97,7 +100,7 @@ export function AppointmentDetails(){
             </ImageBackground>
         
 
-            {/* {
+            {
                 loading ? <Load/> :
             
             <>
@@ -117,9 +120,9 @@ export function AppointmentDetails(){
                 />
             </>
            
-           }         */}
+           }        
 
-            {/* {
+            {
                 guildSelected.guild.owner &&
                <View style={styles.footer}>
                 <ButtonIcon
@@ -127,7 +130,7 @@ export function AppointmentDetails(){
                     onPress={handleLinking}
                 />
                 </View>
-            } */}
+            }
              
 
            
