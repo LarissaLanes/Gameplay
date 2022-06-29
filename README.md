@@ -35,6 +35,12 @@ ATENÇÃO: é necessário que se tenha o expo instalado em seu aparelho de teste
 ```
 Desenvolvedor: Larissa Lanes
 
+![image](https://user-images.githubusercontent.com/91152234/176561757-9759332c-9476-4255-8f4e-87ff2c96a8c2.png)
+
+![image](https://user-images.githubusercontent.com/91152234/176561824-5e5babde-b6f1-486d-ab3c-9de3246160c1.png)
+
+![image](https://user-images.githubusercontent.com/91152234/176561909-c68ae7d2-318e-4caa-b5d4-755e05ebc304.png)
+
 
 
 
